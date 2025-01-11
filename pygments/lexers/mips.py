@@ -1,12 +1,13 @@
 """
     pygments.lexers.mips
     ~~~~~~~~~~~~~~~~~~~~
+
     Lexers for MIPS assembly.
-    :copyright: Copyright 2006-2022 by the Pygments team, see AUTHORS.
+
+    :copyright: Copyright 2006-2025 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
-import re
 from pygments.lexer import RegexLexer, words
 from pygments.token import Whitespace, Comment, String, Keyword, Name, Text
 
@@ -23,10 +24,12 @@ class MIPSLexer(RegexLexer):
 
     name = 'MIPS'
     aliases = ['mips']
+    version_added = ''
     # TODO: add '*.s' and '*.asm', which will require designing an analyse_text
     # method for this lexer and refactoring those from Gas and Nasm in order to
     # have relatively reliable detection
     filenames = ['*.mips', '*.MIPS']
+    url = 'https://mips.com'
 
     keywords = [
         # Arithmetic insturctions
@@ -56,7 +59,7 @@ class MIPSLexer(RegexLexer):
         "tltiu",
         # Exception / Interrupt
         "eret", "break", "bop", "syscall",
-        #--- Floats -----------------------------------------------------
+        # --- Floats -----------------------------------------------------
         # Arithmetic
         "add.s", "add.d", "sub.s", "sub.d", "mul.s", "mul.d", "div.s", "div.d", "neg.d",
         "neg.s",
@@ -87,7 +90,7 @@ class MIPSLexer(RegexLexer):
         "move", # coproc: "mfc1.d",
         # comparisons
         "sgt", "sgtu", "sge", "sgeu", "sle", "sleu", "sne", "seq",
-        #--- Floats -----------------------------------------------------
+        # --- Floats -----------------------------------------------------
         # load-store
         "l.d", "l.s", "s.d", "s.s",
     ]
@@ -112,7 +115,8 @@ class MIPSLexer(RegexLexer):
             (words(pseudoinstructions, suffix=r'\b'), Name.Variable),
             (words(keywords, suffix=r'\b'), Keyword),
             (r'[slm][ftwd]c[0-9]([.]d)?', Keyword),
-            (r'\$(f?[0-2][0-9]|f?3[01]|[ft]?[0-9]|[vk][01]|a[0-3]|s[0-7]|[gsf]p|ra|at|zero)', Keyword.Type),
+            (r'\$(f?[0-2][0-9]|f?3[01]|[ft]?[0-9]|[vk][01]|a[0-3]|s[0-7]|[gsf]p|ra|at|zero)',
+             Keyword.Type),
             (words(directives, suffix=r'\b'), Name.Entity), # Preprocessor?
             (r':|,|;|\{|\}|=>|@|\$|=', Name.Builtin),
             (r'\w+', Text),

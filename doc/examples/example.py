@@ -4,11 +4,11 @@ from typing import Iterator
 class Math:
     @staticmethod
     def fib(n: int) -> Iterator[int]:
-        """ Fibonacci series up to n """
+        """Fibonacci series up to n."""
         a, b = 0, 1
         while a < n:
             yield a
             a, b = b, a + b
 
 result = sum(Math.fib(42))
-print("The answer is {}".format(result))
+print(f"The answer is {result}")

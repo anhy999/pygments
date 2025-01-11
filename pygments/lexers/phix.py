@@ -4,14 +4,15 @@
 
     Lexers for Phix.
 
-    :copyright: Copyright 2006-2022 by the Pygments team, see AUTHORS.
+    :copyright: Copyright 2006-2025 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
 
 import re
 
 from pygments.lexer import RegexLexer, words
-from pygments.token import Text, Comment, Operator, Keyword, Name, String, Whitespace
+from pygments.token import Text, Comment, Operator, Keyword, Name, String, \
+    Whitespace
 
 __all__ = ['PhixLexer']
 
@@ -20,8 +21,6 @@ class PhixLexer(RegexLexer):
     """
     Pygments Lexer for Phix files (.exw).
     See http://phix.x10.mx
-
-    .. versionadded:: 2.14.0
     """
 
     name = 'Phix'
@@ -29,6 +28,7 @@ class PhixLexer(RegexLexer):
     aliases = ['phix']
     filenames = ['*.exw']
     mimetypes = ['text/x-phix']
+    version_added = '2.14'
 
     flags = re.MULTILINE    # nb: **NOT** re.DOTALL! (totally spanners comment handling)
 
@@ -361,4 +361,3 @@ class PhixLexer(RegexLexer):
             (r'[*/#]', Comment.Multiline)
         ]
     }
-
